@@ -39,7 +39,7 @@ function list(response,request){
 	});	
 }
 
-function movement(reponse, request){
+function movement(response, request){
 	var urlParts = url.parse(request.url, true);
 	var query = urlParts.query;
 
@@ -49,6 +49,9 @@ function movement(reponse, request){
 	//if the query has x,y, or z 
 	//add those to the previous x,y,z
 
+	response.writeHead(200, {"Content-Type": "text/html"});
+	response.write("received movement");
+	response.end();
 
 }
 
