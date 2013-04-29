@@ -1,0 +1,12 @@
+{
+	"name": "iot-organic-lobby",
+	"version": "0.0.1",
+	"dependencies": {
+		"express": "3.1.x",
+		"formidable":"1.0.12"
+	},
+	"engines": {
+		"node": "0.10.x",
+		"npm": "1.2.x"
+	}
+}
