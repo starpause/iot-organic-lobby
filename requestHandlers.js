@@ -8,7 +8,7 @@ var url = require("url");
 //could use persistant storage but these are things
 //that can be reset every time we run the server
 
-function start(response,request){
+function start(response,request,io){
 	fs.readFile(__dirname + '/pinger.html',
 	function (err, data) {
 		if (err) {
@@ -20,7 +20,7 @@ function start(response,request){
 	});
 }
 
-function list(response,request){
+function list(response,request,io){
 	console.log("Request handler 'list' was called.");
 
 	exec("ls -lah", function(error,stdout,stderr) {
@@ -30,12 +30,13 @@ function list(response,request){
 	});
 }
 
-function movement(response, request){
+function movement(response, request,io){
 	var urlParts = url.parse(request.url, true);
 	var query = urlParts.query;
 
 	//show the name of the object
 	//console.log(query.object);
+	io.sockets.emit('this', { will: 'be received by everyone'});
 
 	//if the query has x,y, or z 
 	//add those to the previous x,y,z
@@ -46,7 +47,7 @@ function movement(response, request){
 
 }
 
-function upload(response,request){
+function upload(response,request,io){
 	console.log("Request handler 'upload' was called.");
 
 	var form = new formidable.IncomingForm();
@@ -69,7 +70,7 @@ function upload(response,request){
 	});
 }
 
-function show(response, request){
+function show(response, request,io){
 	console.log("Request handler 'show' was called.");
 	fs.readFile("./tmp/test.gif", "binary", function(error,file){
 
