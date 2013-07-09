@@ -33,45 +33,6 @@
   });
 </script>
 
-<script>
-$(function() {
-   
-   //TweenLite.to($('iframe'),.05,{alpha:0});
-   $('iframe').hide();
-    // begin socket io stuff
-  var logger = function(input){
-      document.getElementsByTagName("body")[0].innerHTML += "<br/>" + input
-  }
-  var socket = io.connect(document.URL);
-  
-  // Todo: some checking here for valid id
-  var id = getParameterByName("id");
-  // send the id parameter if this url to the server
-  socket.emit('new page ping', { id: id });
-  
-  function getParameterByName(name) {
-    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-    results = regex.exec(location.search);
-    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
-
-socket.on('news', function (data) {
-  // logger("<br/>data recieved. it works! id = "+ data.id);
-   
-   $.each($('iframe'), function(index, value) {
-       console.log($('iframe').eq(index).attr("id"))
-      if($('iframe').eq(index).attr("id") == "frame"+data.id){
-          //TweenLite.to($(this),.5,{alpha:1});
-          console.log("here")
-          $('iframe').eq(index).show();
-      }
-      else{$('iframe').eq(index).hide()}
-});
-  
-  }); 
-});
-</script>
 
 </body>
 </html>
