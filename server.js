@@ -10,8 +10,24 @@ function start(route, handle) {
 		route(handle, pathname, response, request);
 	}
 
-	http.createServer(onRequest).listen(port);
+	app = http.createServer(onRequest).listen(port);
 	//console.log("Server has started.");
+
+	//init sockets
+	var io = require('socket.io').listen(app);
+	io.sockets.on('connection', function (socket) {
+		socket.emit('news', { hello: 'world' });
+		socket.on('my other event', function (data) {
+			console.log(data);
+		});
+	});
+
+
 }
 
+
+
 exports.start = start;
+
+
+

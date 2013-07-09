@@ -9,24 +9,15 @@ var url = require("url");
 //that can be reset every time we run the server
 
 function start(response,request){
-	console.log("Request handler 'start' was called.");
-
-	var body = '<html>'+
-		'<head>'+
-		'<meta http-equiv="Content-Type" '+
-		'content="text/html; charset=UTF-8" />'+
-		'</head>'+
-		'<body>'+
-		'<form action="/upload" enctype="multipart/form-data" '+
-		'method="post">'+
-		'<input type="file" name="upload">'+
-		'<input type="submit" value="Upload file" />'+
-		'</form>'+
-		'</body>'+
-		'</html>';
-		response.writeHead(200, {"Content-Type": "text/html"});
-		response.write(body);
-		response.end();
+	fs.readFile(__dirname + '/pinger.html',
+	function (err, data) {
+		if (err) {
+			response.writeHead(500);
+			return res.end('Error loading index.html');
+		}
+		response.writeHead(200);
+		response.end(data);
+	});
 }
 
 function list(response,request){
@@ -36,7 +27,7 @@ function list(response,request){
 		response.writeHead(200,{"Content-Type": "text/plain"});
 		response.write(stdout);
 		response.end();
-	});	
+	});
 }
 
 function movement(response, request){
