@@ -11,18 +11,6 @@
             iframe { position:absolute; }
             
         </style>
-</head>
-<body>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.0/TweenMax.min.js"></script>
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<div id="content">
-    <iframe id="frame0" width="500" src="http://apple.com" height="500" scrolling="no"></iframe>
-    <iframe id="frame1" width="500" src="http://cnn.com" height="500" scrolling="no"></iframe>
-    <iframe id="frame2" width="500" src="http://organic.com" height="500" scrolling="no"></iframe>
-    <iframe id="frame3" width="500" src="http://api.jquery.com" height="500" scrolling="no"></iframe>
-</div>
-<script src="/socket.io/socket.io.js"></script>
-
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
@@ -32,6 +20,11 @@
     socket.emit('my other event', { my: 'data' });
   });
 </script>
+
+</head>
+<body>
+
+
 
 
 </body>
