@@ -35,7 +35,7 @@ function movement(response, request){
 	var query = urlParts.query;
 
 	//show the name of the object
-	console.log(query.object);
+	//console.log(query.object);
 
 	//if the query has x,y, or z 
 	//add those to the previous x,y,z
