@@ -1,21 +1,66 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <title>sockets io test</title>
-  <link rel="stylesheet" href="http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>sockets io test</title>
+<link rel="stylesheet" href="http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css">
+        <style type="text/css">
 
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-    var socket = io.connect('http://afternoon-fjord-6952.herokuapp.com');
-    socket.on('news', function (data) {
-      console.log(data);
-      socket.emit('my other event', { my: 'data' });
-    });
-  </script>
-  </head>
+            html, body { height: 100%; }
+            body { font-family: sans-serif; }
+            iframe { position:absolute; }
+            
+        </style>
+</head>
+<body>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.0/TweenMax.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<div id="content">
+    <iframe id="frame0" width="500" src="http://apple.com" height="500" scrolling="no"></iframe>
+    <iframe id="frame1" width="500" src="http://cnn.com" height="500" scrolling="no"></iframe>
+    <iframe id="frame2" width="500" src="http://organic.com" height="500" scrolling="no"></iframe>
+    <iframe id="frame3" width="500" src="http://api.jquery.com" height="500" scrolling="no"></iframe>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+$(function() {
+   
+   //TweenLite.to($('iframe'),.05,{alpha:0});
+   $('iframe').hide();
+    // begin socket io stuff
+  var logger = function(input){
+      document.getElementsByTagName("body")[0].innerHTML += "<br/>" + input
+  }
+  var socket = io.connect(document.URL);
+  
+  // Todo: some checking here for valid id
+  var id = getParameterByName("id");
+  // send the id parameter if this url to the server
+  socket.emit('new page ping', { id: id });
+  
+  function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+    results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 
-  <body>
-  </body>
+socket.on('news', function (data) {
+  // logger("<br/>data recieved. it works! id = "+ data.id);
+   
+   $.each($('iframe'), function(index, value) {
+       console.log($('iframe').eq(index).attr("id"))
+      if($('iframe').eq(index).attr("id") == "frame"+data.id){
+          //TweenLite.to($(this),.5,{alpha:1});
+          console.log("here")
+          $('iframe').eq(index).show();
+      }
+      else{$('iframe').eq(index).hide()}
+});
+  
+  }); 
+});
+</script>
 
+</body>
 </html>
