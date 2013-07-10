@@ -16,11 +16,13 @@ function start(route, handle) {
 
 	//init sockets
 	io = require('socket.io').listen(app);
+	/*
 	io.configure(function () { 
 		io.set("transports", ["xhr-polling"]); 
 		io.set("polling duration", 10); 
 	});
-
+	*/
+	
 	io.sockets.on('connection', function (socket) {
 		socket.emit('news', { hello: 'world' });
 		socket.on('my other event', function (data) {
