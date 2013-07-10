@@ -19,6 +19,10 @@
     console.log(data);
     socket.emit('my other event', { my: 'data' });
   });
+  socket.on('movement', function(data){
+    //switch the view based on data
+    console.log(data);
+  });
 </script>
 
 </head>
