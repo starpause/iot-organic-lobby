@@ -1,0 +1,16 @@
+body {
+	margin: 0px;
+	padding: 0px;
+	font-family: arial;
+	overflow: hidden;
+}
+
+iframe {
+	position: absolute;
+	opacity: 0;
+	overflow: hidden;
+}
+
+#wrapper {
+
+}
